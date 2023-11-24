@@ -15,4 +15,9 @@
 ![My Skills](https://skillicons.dev/icons?i=html,css,spring,java,mysql,postman,git,github)
 
 ### :DEMO
+## Chưa Phân Trang
 ![image](https://github.com/tungcutte35/week05_06_lab_LeThanhTung_20008831/assets/90129081/32af09bf-ec3a-4a3d-a3eb-3f5c49400cb0)
+
+## Đã Phân Trang
+![image](https://github.com/tungcutte35/week05_06_lab_LeThanhTung_20008831/assets/90129081/c7f38a2a-7129-4d51-a07f-dbd2b51f62f4)
+
