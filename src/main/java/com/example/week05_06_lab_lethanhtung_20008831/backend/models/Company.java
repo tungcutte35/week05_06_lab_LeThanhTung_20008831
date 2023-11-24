@@ -5,30 +5,37 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "company")
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "com_id")
     private long id;
+
+    @Column(name = "comp_name", nullable = false)
     private String name;
+
+    @Column(name = "about", length = 2000)
     private String about;
+
+    @Column(name = "phone", nullable = false)
     private String phone;
+
+    @Column(name = "web_url")
     private String webURL;
+
+    @Column(name = "email", nullable = false)
     private String email;
 
     @OneToOne
-    @JoinColumn(name = "add_id", nullable = false)
+    @JoinColumn(name = "address", nullable = false)
     private Address address;
 
-    @OneToMany(mappedBy = "job_id", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
 }

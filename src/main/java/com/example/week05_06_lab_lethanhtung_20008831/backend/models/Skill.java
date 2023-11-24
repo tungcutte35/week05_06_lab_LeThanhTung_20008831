@@ -6,25 +6,28 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "skill")
 public class Skill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "skill_id")
     private long id;
-    private SkillType type;
+
+    @Column(name = "skill_name", nullable = false, length = 150)
     private String skillName;
+
+    @Column(name = "skill_type", nullable = false)
+    private SkillType type;
+
+    @Column(name = "skill_dec", nullable = false, length = 300)
     private String skillDescription;
 
-    @OneToMany
-    @JoinColumn(name = "skill_id")
+    //  ==========================RELATIONSHIP====================================
+    @OneToMany(mappedBy = "skill")
     private List<JobSkill> jobSkills;
 
 }

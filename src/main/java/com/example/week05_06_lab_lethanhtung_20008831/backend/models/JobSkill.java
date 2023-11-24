@@ -6,28 +6,27 @@ import com.example.week05_06_lab_lethanhtung_20008831.backend.ids.JobSkillPK;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Entity
 @Data
-@IdClass(JobSkillPK.class)
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "job_skill")
+@IdClass(JobSkillPK.class)
 public class JobSkill {
-
-    @Enumerated(EnumType.STRING)
+    @Column(name = "skill_level", nullable = false)
     private SkillLevel skillLevel;
-    private  String moreInfo;
 
     @Id
-    @ManyToOne()
-    @JoinColumn(name = "job_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "job_id")
     private Job job;
 
+    @Column(name = "more_infos", length = 1000)
+    private String moreInfo;
+
     @Id
-    @ManyToOne()
-    @JoinColumn(name = "skill_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "skill_id")
     private Skill skill;
+
 }

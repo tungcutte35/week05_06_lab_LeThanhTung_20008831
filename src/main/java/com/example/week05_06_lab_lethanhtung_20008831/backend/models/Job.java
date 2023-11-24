@@ -5,27 +5,28 @@ import lombok.*;
 
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "job")
 public class Job {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "job_id")
     private long id;
-    private String name;
-    private  String description;
 
+    @Column(name = "job_name", nullable = false)
+    private String name;
+
+    @Column(name = "job_dec", length = 2000, nullable = false)
+    private String description;
+    //====================RELATIONSHIS=================
     @ManyToOne
-    @JoinColumn(name = "com_id",nullable = false)
+    @JoinColumn(name = "company")
     private Company company;
 
-    @OneToMany
-    @JoinColumn(name = "job_id",nullable = false)
+    @OneToMany(mappedBy = "job")
     private List<JobSkill> jobSkills;
+
 }

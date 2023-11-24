@@ -5,27 +5,27 @@ import com.example.week05_06_lab_lethanhtung_20008831.backend.ids.CandidateSkill
 import jakarta.persistence.*;
 import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Entity
 @Data
-@IdClass(CandidateSkillPK.class)
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "candidate_skill")
+@IdClass(CandidateSkillPK.class)
 public class CandidateSkill {
     @Id
     @ManyToOne
     @JoinColumn(name = "skill_id")
     private Skill skill;
 
+    @Column(name = "skill_level", nullable = false)
+    private SkillLevel skillLevel;
+
     @Id
     @ManyToOne
-    @JoinColumn(name = "can_id", nullable = false)
+    @JoinColumn(name = "can_id")
     private Candidate candidate;
 
-    @Enumerated(EnumType.STRING)
-    private SkillLevel skillLevel;
-    private String moreInfos;
+    @Column(name = "more_infos", length = 1000)
+    private String moreInfo;
+
 }

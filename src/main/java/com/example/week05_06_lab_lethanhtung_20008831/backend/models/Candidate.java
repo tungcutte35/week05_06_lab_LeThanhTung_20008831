@@ -6,42 +6,56 @@ import lombok.*;
 import java.time.LocalDate;
 import java.util.List;
 
-@Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Entity
 @Data
-@Table(name = "cadidate")
+@NoArgsConstructor
+@AllArgsConstructor
+@Table(name = "candidate")
 public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "can_id")
-    private long canId;
-    private String phone;
-    private LocalDate dob;
-    private String email;
+    private long id;
+
+    @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @OneToOne
-    @JoinColumn(name = "add_id")
+    @Column(name = "dob", nullable = false)
+    @Temporal(TemporalType.DATE)
+    private LocalDate dob;
+
+    @OneToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @JoinColumn(name = "address", nullable = false)
     private Address address;
 
-    @OneToMany
-    @JoinColumn(name = "can_id")
-    private List<CandidateSkill> candidateSkills;
+    @Column(name = "phone", nullable = false, length = 15, unique = true)
+    private String phone;
 
-    @OneToMany
-    @JoinColumn(name = "exp_id",nullable = false)
+    @Column(name = "email", nullable = false, unique = true)
+    private String email;
+
+    //  ==========================RELATIONSHIP====================================
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
     private List<Experience> experiences;
 
+    @OneToMany(mappedBy = "candidate", fetch = FetchType.LAZY)
+    private List<CandidateSkill> candidateSkills;
 
-    public Candidate(String phone, LocalDate dob, String email, String fullName, Address address) {
-        this.phone = phone;
-        this.dob = dob;
-        this.email = email;
+    public Candidate(String fullName, LocalDate dob, Address address, String phone, String email, List<Experience> experiences, List<CandidateSkill> candidateSkills) {
         this.fullName = fullName;
+        this.dob = dob;
         this.address = address;
+        this.phone = phone;
+        this.email = email;
+        this.experiences = experiences;
+        this.candidateSkills = candidateSkills;
+    }
+
+    public Candidate(String fullName, LocalDate dob, Address address, String phone, String email) {
+        this.fullName = fullName;
+        this.dob = dob;
+        this.address = address;
+        this.phone = phone;
+        this.email = email;
     }
 }
